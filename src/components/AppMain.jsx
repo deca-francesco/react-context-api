@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import ArticleCard from './ArticleCard.jsx';
 import ArticleList from './ArticleList.jsx';
 import Form from './Form.jsx';
-import SearcBar from './Searchbar.jsx';
+import SearchBar from './Searchbar.jsx';
 import ArticleDetails from '../pages/ArticleDetails.jsx';
 
+import PostsContext from '../contexts/PostsContext.jsx';
 
 export default function AppMain({ api_server, end_point }) {
 
@@ -17,33 +18,30 @@ export default function AppMain({ api_server, end_point }) {
     };
 
     const [formData, setFormData] = useState(initialFormData);
-
-    const [postsData, setPostsData] = useState([])
-
     const [loading, setLoading] = useState(false);
 
+    // const [postsData, setPostsData] = useState([])
 
+    // function fetchData(url = `${api_server}${end_point}`) {
+    //     fetch(url)
 
-    function fetchData(url = `${api_server}${end_point}`) {
-        fetch(url)
+    //         .then(res => res.json())
 
-            .then(res => res.json())
+    //         .then(data => {
 
-            .then(data => {
+    //             // console.log(data);
 
-                // console.log(data);
+    //             setPostsData(data.data)
 
-                setPostsData(data.data)
+    //         }).catch(err => {
+    //             console.error(err.message);
+    //         })
+    // }
 
-            }).catch(err => {
-                console.error(err.message);
-            })
-    }
+    // // esegue subito al caricamento della pagina, ma una volta sola perché non ha dipendenze
+    // useEffect(fetchData, [])
 
-    // esegue subito al caricamento della pagina, ma una volta sola perché non ha dipendenze
-    useEffect(fetchData, [])
-
-    // useEffect(fetchData, [postsData])
+    const { postsData } = useContext(PostsContext)
 
 
     function handleFormField(e) {
@@ -129,12 +127,13 @@ export default function AppMain({ api_server, end_point }) {
             <div className="container">
                 <Form formData={formData} handleFormField={handleFormField} handleFormSubmit={handleFormSubmit} is_loading={loading} />
 
-                <SearcBar fetchData={fetchData} postsData={postsData} setPostsData={setPostsData} />
+                {/* <SearchBar fetchData={fetchData} postsData={postsData} setPostsData={setPostsData} /> */}
+                <SearchBar />
 
                 <ArticleList>
                     {postsData ? postsData.map((post, index) => (
-                        <ArticleCard key={index} data={post} index={index} api_server={api_server} end_point={end_point} handleDeleteClick={handleDeleteClick} >
-                        </ArticleCard>
+                        // <ArticleCard key={index} data={post} index={index} api_server={api_server} end_point={end_point} handleDeleteClick={handleDeleteClick} > </ArticleCard>
+                        <ArticleCard key={index} data={post} index={index} api_server={api_server} end_point={end_point} handleDeleteClick={handleDeleteClick} > </ArticleCard>
                     )) : <p>No data found</p>
                     }
                 </ArticleList>

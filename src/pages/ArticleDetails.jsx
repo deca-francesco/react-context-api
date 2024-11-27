@@ -13,7 +13,8 @@ export default function ArticleDetails({ api_server, end_point }) {
 
     const [prev, setPrev] = useState(null)
     const [next, setNext] = useState(null)
-
+    // let prev = null
+    // let next = null
 
 
     useEffect(
@@ -50,14 +51,17 @@ export default function ArticleDetails({ api_server, end_point }) {
 
                 const result = data.data
 
-                const currentPostIndex = result.indexOf(result.find(item => item.slug === currentSlug))
+                const currentPostIndex = result?.indexOf(result.find(item => item.slug === currentSlug))
 
                 console.log(currentPostIndex);
 
-                setPrev(result[currentPostIndex - 1])
-                setNext(result[currentPostIndex + 1])
+                setPrev(data?.data[currentPostIndex - 1])
+                setNext(data?.data[currentPostIndex + 1])
 
-                console.log(result[currentPostIndex]);
+                // prev = result[currentPostIndex - 1]
+                // next = result[currentPostIndex + 1]
+
+                console.log(data?.data[currentPostIndex]);
                 console.log(prev);
                 console.log(next);
 
@@ -104,6 +108,7 @@ export default function ArticleDetails({ api_server, end_point }) {
                                         </ Link>
                                         <div className="mt-4 mb-4">
                                             <button type="button" className="btn btn-outline-secondary" onClick={prevHandle} >Post precedente</button>
+
                                             <span></span>
                                             <button type="button" className="btn btn-outline-secondary ms-3" onClick={nextHandle} >Post successivo</button>
                                         </div>

@@ -1,3 +1,4 @@
+import { useContext } from "react"
 import { Link } from "react-router"
 
 export default function ArticleCard({ data, index, handleDeleteClick, api_server, children }) {
@@ -8,6 +9,7 @@ export default function ArticleCard({ data, index, handleDeleteClick, api_server
     //     setCurrentIndex(dataIndex);
     //     setModifyArticle(articles[dataIndex]);
     // }
+
 
 
 

@@ -1,5 +1,5 @@
 
-export default function SearcBar({ fetchData, postsData, setPostsData }) {
+export default function SearchBar({ fetchData, postsData, setPostsData }) {
 
 
     function search(searchQuery) {
