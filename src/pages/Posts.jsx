@@ -41,7 +41,7 @@ export default function Posts({ api_server, end_point }) {
     // // esegue subito al caricamento della pagina, ma una volta sola perché non ha dipendenze
     // useEffect(fetchData, [])
 
-    const { postsData } = useContext(PostsContext)
+    const { postsData, setPostsData, fetchData } = useContext(PostsContext)
 
 
     function handleFormField(e) {
@@ -127,8 +127,8 @@ export default function Posts({ api_server, end_point }) {
             <div className="container">
                 <Form formData={formData} handleFormField={handleFormField} handleFormSubmit={handleFormSubmit} is_loading={loading} />
 
-                {/* <SearchBar fetchData={fetchData} postsData={postsData} setPostsData={setPostsData} /> */}
-                <SearchBar />
+                <SearchBar fetchData={fetchData} postsData={postsData} setPostsData={setPostsData} />
+                {/* <SearchBar /> */}
 
                 <ArticleList>
                     {postsData ? postsData.map((post, index) => (

@@ -45,7 +45,7 @@ function App() {
 
   return (
     <>
-      <PostsContext.Provider value={postsData} >
+      <PostsContext.Provider value={{ postsData, setPostsData, fetchData }} >
         <BrowserRouter>
           <Routes>
             <Route element={<DefaultLayout />} >
